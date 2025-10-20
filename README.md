@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GitHub Template Repository
 
 Welcome to the GitHub template repository for the **courses (CS3361, CS3365)**! This template serves as a starting point for your first assignment of creating and deploying your portfolio. Follow the instructions below to download, customize, and push your work to your own GitHub repository.
@@ -80,3 +81,6 @@ This project template is licensed under the [MIT License](LICENSE).
 ---
 
 Celebrate and enjoy your coding experience! 🚀
+=======
+# Project-InternAhead
+>>>>>>> eecefc8747abe448084cc2633ccda9d8760a45c3
