@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Longoria - Academic Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+    }
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+nav.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav li:first-child {
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #764ba2;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    background: rgba(118, 75, 162, 0.1);
+    color: #764ba2;
+}
+
+.menu-button {
+    display: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.menu-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    height: 100vh;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+    z-index: 1002;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+    padding: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #333;
+    background: rgba(0,0,0,0.1);
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.sidebar-nav li {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 18px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(118, 75, 162, 0.1);
+    color: #764ba2;
+    padding-left: 30px;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.profile-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+     gap: 2rem;
+   margin-bottom: 2rem;
+}
+.profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+}
+
+/* Scroll Progress Bar */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    z-index: 1001;
+    transition: width 0.1s ease;
+}
+@media (max-width: 768px) {
+      nav ul { 
+        justify-content: space-between; 
+    }
+    
+    .menu-button { 
+        display: flex; 
+    }
+    
+    .hideOnMobile { 
+        display: none !important; 
+    }
+
+}
+.profile-info h1 {
+font-size: 2rem;
+margin-bottom: 0.5rem;
+}
+</style>
+</head>
+<body>
+    <!--Progress-Bar-->
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">InternAhead</a></li>
+            <li class="nav-item hideOnMobile"><a href="#home">Home</a></li>
+            <li class="nav-item hideOnMobile"><a href="#pathways">Pathways</a></li>
+            <li class="nav-item hideOnMobile"><a href="#explor">Explore</a></li>
+            <li class="nav-item hideOnMobile"><a href="#profile">Profile</a></li>
+            <li class="nav-item hideOnMobile"><a href="#contact">Logout</a></li>
+            <li class="menu-button" onclick="showSidebar()">
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>Navigation</span>
+            <button class="close-btn" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="hideSidebar()"></div>
+
+        <nav>
+            <a href="index.html" class="name-title">Joshua Longoria</a>
+            <div class="nav-links">
+                <a href="projects.html">Projects</a>
+                <a href="files/Joshua longoria_cv.pdf" target="_blank">CV</a>
+            </div>
+        </nav>
+        </div>
+    </div>
+    <script src=""></script>
+</body>
+</html>
+
