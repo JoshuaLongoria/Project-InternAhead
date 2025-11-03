@@ -1,1 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison InternAhead - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* ------------------------------------------------------------------ */
+        /* --- COPY OF CSS FROM ORIGINAL FILE FOR SELF-CONTAINED HOME PAGE --- */
+        /* ------------------------------------------------------------------ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        body {
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav li:first-child {
+            margin-right: auto;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #764ba2;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+        }
+        
+        /* Highlight the active link (optional, for home) */
+        nav a[href="#home"] {
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+
+        .menu-button {
+            display: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-button a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            height: 100vh;
+            width: 280px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            line-height: 1;
+            padding: 5px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #333;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .sidebar-nav li {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 18px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+            padding-left: 30px;
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* HOME PAGE STYLING */
+        .home-section {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            padding: 6rem 2rem 2rem;
+            max-width: 900px; /* Adjusted max width for a cleaner main content area */
+            margin: 0 auto;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #f0f4ff, #e7e0f8);
+            padding: 4rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .hero-section h1 {
+            font-size: 2.5rem;
+            color: #764ba2;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background-color: #764ba2;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+
+        .content-card {
+            background: #f5f7f8;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .content-card h2 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .content-card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact/Sign-In Specific Styles */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #764ba2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #667eea;
+        }
+
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav ul { 
+                justify-content: space-between; 
+            }
+            
+            .menu-button { 
+                display: flex; 
+            }
+            
+            .hideOnMobile { 
+                display: none !important; 
+            }
+
+            .home-section {
+                padding: 5rem 1rem 1rem;
+                gap: 2rem;
+            }
+            
+            .hero-section {
+                padding: 2rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .content-card h2 {
+                font-size: 1.5rem;
+            }
+        }
+        /* ------------------------------------------------------------------ */
+        /* ------------------- END OF COPIED CSS ---------------------------- */
+        /* ------------------------------------------------------------------ */
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="hideSidebar()"></div>
+
+    <nav>
+        <ul>
+            <li><a href="home.html">
+                <span style="color:black;">Intern</span><span style="color:red;">Ahead</span>
+            </a></li>
+            <li class="nav-item hideOnMobile"><a href="home.html">Home</a></li>
+            <li class="nav-item hideOnMobile"><a href="#pathways">Pathways</a></li>
+            <li class="nav-item hideOnMobile"><a href="#explor">Explore</a></li>
+            <li class="nav-item hideOnMobile"><a href="profile.html">Profile</a></li>
+            <li class="nav-item hideOnMobile"><a href="#signin">Logout</a></li>
+            <li class="menu-button" onclick="showSidebar()">
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>Navigation</span>
+            <button class="close-btn" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="home.html" onclick="hideSidebar()">Home</a></li>
+            <li><a href="#about-us" onclick="hideSidebar()">About Us</a></li>
+            <li><a href="#contact" onclick="hideSidebar()">Contact</a></li>
+            <li><a href="#signin" onclick="hideSidebar()">Sign In</a></li>
+            <li><a href="profile.html" onclick="hideSidebar()">Profile</a></li>
+            <li><a href="#logout" onclick="hideSidebar()">Logout</a></li>
+        </ul>
+    </div>
+
+    <main class="home-section">
+        
+        <section class="hero-section" id="home">
+            <h1>Your Future Internship Starts Here.</h1>
+            <p>Connect with leading companies, explore personalized career pathways, and land your dream internship with InternAhead.</p>
+            <a href="#signin" class="cta-button">Get Started Today</a>
+        </section>
+
+        <div class="content-card" id="about-us">
+            <h2><i class="fas fa-users" style="margin-right: 10px;"></i>About InternAhead</h2>
+            <p>
+                **InternAhead** is dedicated to bridging the gap between ambitious students and industry-leading companies. We believe every student deserves a clear and guided path to professional experience.
+            </p>
+            <p>
+                Our platform uses advanced algorithms to match your skills, education, and career goals with the perfect internship opportunities, ensuring you're not just finding a job, but building a foundational career.
+            </p>
+        </div>
+
+        <div class="content-card" id="contact">
+            <h2><i class="fas fa-headset" style="margin-right: 10px;"></i>Contact Us</h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+
+        <div class="content-card" id="signin">
+            <h2><i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i>Sign In / Register</h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="login-password" required>
+                </div>
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                Don't have an account? <a href="#register" style="color: #764ba2; text-decoration: none;">Register Now</a>
+            </p>
+        </div>
+
+    </main>
+
+    <script>
+        /* ------------------------------------------------------------------ */
+        /* --- COPY OF JAVASCRIPT FROM ORIGINAL FILE FOR FUNCTIONALITY --- */
+        /* ------------------------------------------------------------------ */
+        function showSidebar() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('sidebarOverlay').classList.add('active');
+        }
+
+        function hideSidebar() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        // Progress bar on scroll
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.progress-bar').style.width = scrolled + '%';
+        });
+
+        // Add scrolled class to nav
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        /* ------------------------------------------------------------------ */
+        /* ------------------- END OF COPIED JAVASCRIPT --------------------- */
+        /* ------------------------------------------------------------------ */
+    </script>
+</body>
+</html>
