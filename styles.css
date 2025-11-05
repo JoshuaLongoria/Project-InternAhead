@@ -258,6 +258,110 @@
             line-height: 1.8;
             margin-bottom: 1rem;
         }
+/* --- Value Proposition Styling (#value-prop) --- */
+
+/* Style for the inner container holding student/company lists */
+.content-card#value-prop > div {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap; 
+}
+
+/* Style for the section headers (For Students/For Companies) */
+.content-card#value-prop h3 {
+    color: #667eea; /* Secondary accent color */
+    margin-bottom: 15px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(118, 75, 162, 0.1); /* Light purple line */
+    padding-bottom: 5px;
+}
+
+/* Style for the benefit lists */
+.content-card#value-prop ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.content-card#value-prop ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #333; /* Dark text for readability */
+}
+
+/* Ensure the checkmark icon stands out */
+.content-card#value-prop .fas.fa-check-circle {
+    color: #764ba2; /* Primary accent color */
+    margin-right: 10px;
+}
+
+/* --- How It Works Step Styling (#how-it-works) --- */
+
+/* Targets the list (ordered or unordered) */
+.content-card#how-it-works ol {
+    list-style-type: none; 
+    padding-left: 0; 
+    counter-reset: step-counter; /* Initialize counter for custom numbering */
+}
+
+/* Style for each individual step list item */
+.content-card#how-it-works ol li {
+    margin-bottom: 20px;
+    counter-increment: step-counter; /* Increment the counter */
+    display: flex;
+    align-items: flex-start;
+    font-size: 1rem;
+}
+
+/* Styling the number/icon circle container */
+.content-card#how-it-works ol li > div:first-child {
+    background-color: #764ba2; /* Primary accent color */
+    color: white;
+    border-radius: 50%;
+    width: 30px; /* Slightly larger circle */
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevents the circle from shrinking */
+}
+
+/* Styling the main text content for the step */
+.content-card#how-it-works ol li > div:last-child {
+    padding-top: 3px; /* Align text vertically with icon */
+}
+
+/* Style for the step title/strong text */
+.content-card#how-it-works strong {
+    color: #764ba2;
+    display: block; /* Ensures the strong text is on its own line */
+    margin-bottom: 3px;
+    font-size: 1.05rem;
+}
+
+/* Style for the closing summary paragraph */
+.content-card#how-it-works p {
+    margin-top: 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 15px;
+    font-style: italic;
+    color: #555;
+}
+
+/* --- Media Query Adjustments for Mobile --- */
+
+@media (max-width: 600px) {
+    /* Stack the student/company value prop lists vertically */
+    .content-card#value-prop > div {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
 
         /* Contact/Sign-In Specific Styles */
         .form-group {
@@ -306,6 +410,142 @@
         .submit-btn:hover {
             background-color: #667eea;
         }
+/* --- Footer Styles --- */
+.site-footer {
+    background: #f5f7f8; /* Dark background for contrast */
+    color: #555; /* Light text color */
+    padding: 40px 20px 20px;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.site-footer a {
+    color: #333; /* Light links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+    color: #764ba2; /* Accent color on hover */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between;
+    gap: 30px; /* Space between columns */
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer-section {
+    flex: 1; /* Allow sections to grow */
+    min-width: 250px; /* Minimum width before wrapping */
+}
+
+.footer-section h3 {
+    color: #764ba2;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    color: #555;
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #764ba2;
+    transform: translateY(-3px);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.contact-info p i {
+    margin-right: 10px;
+    color: #764ba2; /* Highlight icons with accent color */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Media Queries for Footer Responsiveness --- */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        min-width: 100%; /* Take full width */
+        margin-bottom: 20px;
+    }
+
+    .footer-section h3 {
+        text-align: center;
+    }
+
+    .footer-section ul {
+        padding: 0; /* Remove default padding for centered list */
+    }
+
+    .footer-section ul li {
+        display: inline-block; /* Make list items inline for a compact look */
+        margin: 0 10px; /* Add horizontal spacing */
+    }
+
+    .social-links {
+        margin-top: 15px;
+    }
+
+    .social-links a {
+        margin: 0 8px; /* Adjust social icon spacing */
+    }
+
+    .contact-info p {
+        justify-content: center; /* Center contact info */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section ul li {
+        display: block; /* Stack links again on very small screens */
+        margin: 0;
+        margin-bottom: 5px;
+    }
+}
 
 
         /* Mobile Responsive */
