@@ -306,6 +306,142 @@
         .submit-btn:hover {
             background-color: #667eea;
         }
+/* --- Footer Styles --- */
+.site-footer {
+    background: #333; /* Dark background for contrast */
+    color: #f4f7f6; /* Light text color */
+    padding: 40px 20px 20px;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.site-footer a {
+    color: #f4f7f6; /* Light links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+    color: #764ba2; /* Accent color on hover */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between;
+    gap: 30px; /* Space between columns */
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-section {
+    flex: 1; /* Allow sections to grow */
+    min-width: 250px; /* Minimum width before wrapping */
+}
+
+.footer-section h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    color: #f4f7f6;
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #764ba2;
+    transform: translateY(-3px);
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.contact-info p i {
+    margin-right: 10px;
+    color: #764ba2; /* Highlight icons with accent color */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Media Queries for Footer Responsiveness --- */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        min-width: 100%; /* Take full width */
+        margin-bottom: 20px;
+    }
+
+    .footer-section h3 {
+        text-align: center;
+    }
+
+    .footer-section ul {
+        padding: 0; /* Remove default padding for centered list */
+    }
+
+    .footer-section ul li {
+        display: inline-block; /* Make list items inline for a compact look */
+        margin: 0 10px; /* Add horizontal spacing */
+    }
+
+    .social-links {
+        margin-top: 15px;
+    }
+
+    .social-links a {
+        margin: 0 8px; /* Adjust social icon spacing */
+    }
+
+    .contact-info p {
+        justify-content: center; /* Center contact info */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section ul li {
+        display: block; /* Stack links again on very small screens */
+        margin: 0;
+        margin-bottom: 5px;
+    }
+}
 
 
         /* Mobile Responsive */
