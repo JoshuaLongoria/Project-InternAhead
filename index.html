@@ -3,369 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joshua Longoria - InternAhead_Profile </title>
+    <title>Harrison InternAhead - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #ffffff;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            z-index: 1001;
-            transition: width 0.1s ease;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            list-style: none;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        nav li:first-child {
-            margin-right: auto;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #764ba2;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            margin: 0 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        nav a:hover {
-            background: rgba(118, 75, 162, 0.1);
-            color: #764ba2;
-        }
-
-        .menu-button {
-            display: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .menu-button a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            height: 100vh;
-            width: 280px;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
-            z-index: 1002;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar.active {
-            right: 0;
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #666;
-            line-height: 1;
-            padding: 5px;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: #333;
-            background: rgba(0,0,0,0.1);
-        }
-
-        .sidebar-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            flex: 1;
-        }
-
-        .sidebar-nav li {
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .sidebar-nav a {
-            display: block;
-            padding: 18px 20px;
-            color: #333;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .sidebar-nav a:hover {
-            background: rgba(118, 75, 162, 0.1);
-            color: #764ba2;
-            padding-left: 30px;
-        }
-
-        /* Sidebar Overlay */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Profile Section */
-        .profile-section {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 3rem;
-            padding: 6rem 2rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Left Sidebar */
-        .profile-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            background: #f5f7f8;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            height: fit-content;
-            position: sticky;
-            top: 100px;
-        }
-
-        .profile-image {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            border: 5px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .profile-details h1 {
-            font-size: 1.8rem;
-            color: #764ba2;
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-details p {
-            color: #db3535;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .profile-details .title {
-            font-weight: 600;
-            color: #333;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-item i {
-            color: #764ba2;
-            font-size: 1.1rem;
-            width: 20px;
-        }
-
-        .info-item span {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        /* Main Content Area */
-        .profile-main {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .content-card {
-            background: #f5f7f8;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .content-card h2 {
-            color: #764ba2;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #ffffff;
-        }
-
-        .content-card h3 {
-            color: #333;
-            font-size: 1.3rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .content-card p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .content-card ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .content-card li {
-            color: #555;
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            nav ul { 
-                justify-content: space-between; 
-            }
-            
-            .menu-button { 
-                display: flex; 
-            }
-            
-            .hideOnMobile { 
-                display: none !important; 
-            }
-
-            .profile-section {
-                grid-template-columns: 1fr;
-                padding: 5rem 1rem 1rem;
-                gap: 2rem;
-            }
-
-            .profile-sidebar {
-                position: static;
-            }
-
-            .profile-details h1 {
-                font-size: 1.5rem;
-            }
-
-            .content-card {
-                padding: 1.5rem;
-            }
-
-            .content-card h2 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Progress Bar -->
     <div class="progress-bar"></div>
 
-    <!-- Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="hideSidebar()"></div>
 
-    <!-- Navigation -->
     <nav>
         <ul>
-            <li><a href="#home">
-                <span style="color:black;"">Intern</span><span style="color:red;">Ahead</span>
+            <li><a href="home.html">
+                <span style="color:black;">Intern</span><span style="color:red;">Ahead</span>
             </a></li>
-            <li class="nav-item hideOnMobile"><a href="#home">Home</a></li>
+            <li class="nav-item hideOnMobile"><a href="home.html">Home</a></li>
             <li class="nav-item hideOnMobile"><a href="#pathways">Pathways</a></li>
             <li class="nav-item hideOnMobile"><a href="#explor">Explore</a></li>
-            <li class="nav-item hideOnMobile"><a href="#profile">Profile</a></li>
-            <li class="nav-item hideOnMobile"><a href="#contact">Logout</a></li>
+            <li class="nav-item hideOnMobile"><a href="profile.html">Profile</a></li>
+            <li class="nav-item hideOnMobile"><a href="#signin">Logout</a></li>
             <li class="menu-button" onclick="showSidebar()">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -376,7 +32,6 @@
         </ul>
     </nav>
 
-    <!-- Mobile Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <span>Navigation</span>
@@ -387,130 +42,86 @@
             </button>
         </div>
         <ul class="sidebar-nav">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#pathways">Pathways</a></li>
-            <li><a href="#explor">Explore</a></li>
-            <li><a href="#profile">Profile</a></li>
-            <li><a href="#contact">Logout</a></li>
+            <li><a href="home.html" onclick="hideSidebar()">Home</a></li>
+            <li><a href="#about-us" onclick="hideSidebar()">About Us</a></li>
+            <li><a href="#contact" onclick="hideSidebar()">Contact</a></li>
+            <li><a href="#signin" onclick="hideSidebar()">Sign In</a></li>
+            <li><a href="profile.html" onclick="hideSidebar()">Profile</a></li>
+            <li><a href="#logout" onclick="hideSidebar()">Logout</a></li>
         </ul>
     </div>
 
-    <!-- Main Content -->
-    <main>
-        <section class="profile-section" id="profile">
-            <!-- Left Sidebar -->
-            <div class="profile-sidebar">
-                <img src="images/Random Profile Pic.jpg" alt="Joshua Longoria" class="profile-image">
-                
-                <div class="profile-details">
-                    <h1>John Doe</h1>
-                    <p class="title">Computer Science Student</p>
-                    
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>johnDoe@university.edu</span>
-                    </div>
-                    
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <span>(123) 456-7890</span>
-                    </div>
-                    
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Lubbock, Texas</span>
-                    </div>
-                    
-                    <div class="info-item">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Expected Graduation: 2027</span>
-                    </div>
-                    
-                    <div class="info-item">
-                        <i class="fab fa-linkedin"></i>
-                        <span>linkedin.com/in/johnDoe</span>
-                    </div>
-                    
-                    <div class="info-item">
-                        <i class="fab fa-github"></i>
-                        <span>github.com/john Doe</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content Area -->
-            <div class="profile-main">
-                <div class="content-card">
-                    <h2>About Me</h2>
-                    <p>
-                        I am a passionate computer science student with a strong interest in software development, 
-                        artificial intelligence, and web technologies. Throughout my academic journey, I've developed 
-                        a solid foundation in programming languages and problem-solving skills.
-                    </p>
-                    <p>
-                        My goal is to contribute to innovative projects that make a positive impact on society 
-                        while continuously expanding my knowledge and expertise in the field of technology.
-                    </p>
-                </div>
-
-                <div class="content-card">
-                    <h2>Education</h2>
-                    <h3>Bachelor of Science in Computer Science</h3>
-                    <p><strong>Texas Tech University</strong> | Expected Graduation: May 2027</p>
-                    <p>GPA: 3.8/4.0</p>
-                    <p><strong>Relevant Coursework:</strong></p>
-                    <ul>
-                        <li>Data Structures and Algorithms</li>
-                        <li>Software Engineering</li>
-                        <li>Database Management Systems</li>
-                        <li>Web Development</li>
-                        <li>Artificial Intelligence</li>
-                    </ul>
-                </div>
-
-                <div class="content-card">
-                    <h2>Skills</h2>
-                    <h3>Programming Languages</h3>
-                    <p>Python, Java, JavaScript, C++, HTML/CSS, SQL</p>
-                    
-                    <h3>Technologies & Tools</h3>
-                    <p>React, Node.js, Git, Docker, MongoDB, PostgreSQL, AWS</p>
-                    
-                    <h3>Soft Skills</h3>
-                    <p>Team Collaboration, Problem Solving, Communication, Project Management</p>
-                </div>
-
-                <div class="content-card">
-                    <h2>Experience</h2>
-                    <h3>Software Development Intern</h3>
-                    <p><strong>Tech Company XYZ</strong> | Summer 2024</p>
-                    <ul>
-                        <li>Developed and maintained web applications using React and Node.js</li>
-                        <li>Collaborated with cross-functional teams to deliver features on schedule</li>
-                        <li>Participated in code reviews and implemented best practices</li>
-                        <li>Improved application performance by 30% through optimization</li>
-                    </ul>
-                </div>
-
-                <div class="content-card">
-                    <h2>Projects</h2>
-                    <h3>Task Management Application</h3>
-                    <p>
-                        Built a full-stack task management application using React, Node.js, and MongoDB. 
-                        Features include user authentication, real-time updates, and responsive design.
-                    </p>
-                    
-                    <h3>Machine Learning Model for Image Classification</h3>
-                    <p>
-                        Developed a convolutional neural network using Python and TensorFlow to classify 
-                        images with 95% accuracy. Implemented data augmentation and transfer learning techniques.
-                    </p>
-                </div>
-            </div>
+    <main class="home-section">
+        
+        <section class="hero-section" id="home">
+            <h1>Your Future Job/Internship Starts Here.</h1>
+            <p>Bridging the gap students and employers by turning real-world projects into portfolios and talent pipelines</p>
+            <a href="#signin" class="cta-button">Get Started as Student</a>
         </section>
+
+        <div class="content-card" id="about-us">
+            <h2><i class="fas fa-users" style="margin-right: 10px;"></i>About InternAhead</h2>
+            <p>
+               Welcome to InternAhead a site built by students, for students. Our goal is to help beginner computer science learners build the skills, confidence, and experience they need to stand out in today’s tech-driven job market.
+            </p>
+            <p>
+                We understand that starting out in computer science can feel overwhelming. That’s why we provide practical resources, project ideas, and career guidance focused on what employers are really looking for. From coding fundamentals to teamwork, problem-solving, and portfolio building.
+                Whether you’re just learning your first programming language or getting ready for internships, InternAHead is here to help you grow, learn, and prepare for success.
+            </p>
+             <p>
+              Value Proposition for companies: 1:Demonstration of Modern Skills 2:High Design Standards  3:Attention to Detail 4:Proof of Usability Focus
+            </p>
+            <p>
+              Value Proposition for students: 1:Faster Learning & References 2:Professional User Experience  3:Mobile Accessibility 4:Increased Productivity
+            </p>
+             <p>
+               How It Works: 1:first sign up by scollin down and clinking sign up 2:then click get stayed as a student to get started 3 if you are confuzed use the contact form
+            </p>
+        </div>
+
+        <div class="content-card" id="contact">
+            <h2><i class="fas fa-headset" style="margin-right: 10px;"></i>Contact Us</h2>
+            <form action="https://formspree.io/f/xwpwgevv" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+
+        <div class="content-card" id="signin">
+            <h2><i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i>Sign In / Register</h2>
+            <form action="https://formspree.io/f/xwpwgevv" method="POST">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="login-password" required>
+                </div>
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                Don't have an account? <a href="#register" style="color: #764ba2; text-decoration: none;">Register Now</a>
+            </p>
+        </div>
+
     </main>
 
     <script>
+        /* ------------------------------------------------------------------ */
+        /* --- COPY OF JAVASCRIPT FROM ORIGINAL FILE FOR FUNCTIONALITY --- */
+        /* ------------------------------------------------------------------ */
         function showSidebar() {
             document.getElementById('sidebar').classList.add('active');
             document.getElementById('sidebarOverlay').classList.add('active');
@@ -538,6 +149,9 @@
                 nav.classList.remove('scrolled');
             }
         });
+        /* ------------------------------------------------------------------ */
+        /* ------------------- END OF COPIED JAVASCRIPT --------------------- */
+        /* ------------------------------------------------------------------ */
     </script>
 </body>
 </html>
