@@ -34,7 +34,6 @@
 ### [Harrison Greene]]
 -  Implemented landing page HTML structure
 - Made site responsive for mobile devices
-- [Dara Alli]
-- ### [Team Member 4 Name]
+- ### [Dara Alli]
 - Implemented landing page HTML structure
 - Created responsive navigation bar
