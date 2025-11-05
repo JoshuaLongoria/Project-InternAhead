@@ -7,8 +7,9 @@
 - [Dara Alli] - [daraalli]
 - [Harrison Greene] - [Harrison-Greene]
 ## Project Description
-Brief description of the Connect platform and what this project
-implements. (Refer to BMC document)
+-A platform that matches students to employer-submitted or curated real word projects
+-built in mentor/feedback loop and project milestone tracking
+-Escrow/payments or credits for student to keep incetives aligned and outputs reliable
 ## Pages Implemented
 1. Landing Page (index.html)
 2. Student Dashboard (student-dashboard.html)
