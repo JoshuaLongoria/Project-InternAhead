@@ -4,7 +4,7 @@
 ## Team Members
 - [Joshua Longoria] - [JoshuaLongoria]
 - [Jacob Henry] - [jk1925]
-- [Dara Alli] - [GitHub Username]
+- [Dara Alli] - [daraalli]
 - [Harrison Greene] - [Harrison-Greene]
 ## Project Description
 Brief description of the Connect platform and what this project
@@ -21,18 +21,19 @@ implements. (Refer to BMC document)
 - GitHub Pages
 - visual studio
 ## Individual Contributions Sample
-### [Team Member 1 Name]
+### [Joshua Longoria]
 - Implemented landing page HTML structure
 - Created responsive navigation bar
+-  Designed and implemented color scheme
 - [List other specific contributions]
-### [Team Member 2 Name]
+### [Jacob Henry]
 - Designed and implemented color scheme
 - Created footer component
 - [List other specific contributions]
-### [Team Member 3 Name]
-- Implemented hero section styling
+### [Harrison Greene]]
+-  Implemented landing page HTML structure
 - Made site responsive for mobile devices
-- [List other specific contributions]
+- [Dara Alli]
 - ### [Team Member 4 Name]
 - Implemented landing page HTML structure
 - Created responsive navigation bar
