@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joshua Longoria - InternAhead_Profile </title>
+    <title>Joshua Longoria - InternAhead Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         * {
@@ -53,7 +53,7 @@
             align-items: center;
             list-style: none;
             padding: 1rem 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -190,17 +190,17 @@
             visibility: visible;
         }
 
-        /* Profile Section */
+        /* Three Column Layout */
         .profile-section {
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 3rem;
+            grid-template-columns: 300px 1fr 320px;
+            gap: 2rem;
             padding: 6rem 2rem 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Left Sidebar */
+        /* Left Sidebar - Profile Info */
         .profile-sidebar {
             display: flex;
             flex-direction: column;
@@ -231,7 +231,7 @@
         }
 
         .profile-details p {
-            color: #db3535;
+            color: #666;
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
         }
@@ -264,7 +264,7 @@
             color: #555;
         }
 
-        /* Main Content Area */
+        /* Center Column - Main Content */
         .profile-main {
             display: flex;
             flex-direction: column;
@@ -276,14 +276,40 @@
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ffffff;
         }
 
         .content-card h2 {
             color: #764ba2;
             font-size: 1.8rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #ffffff;
+        }
+
+        .edit-btn {
+            background: white;
+            border: 2px solid #764ba2;
+            color: #764ba2;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .edit-btn:hover {
+            background: #764ba2;
+            color: white;
         }
 
         .content-card h3 {
@@ -310,7 +336,224 @@
             line-height: 1.6;
         }
 
+        /* Right Sidebar - Active Projects & Opportunities */
+        .projects-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .projects-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .projects-sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .projects-sidebar::-webkit-scrollbar-thumb {
+            background: #764ba2;
+            border-radius: 10px;
+        }
+
+        .projects-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #667eea;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .opportunities-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: #f5f7f8;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-info h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .company-name {
+            color: #764ba2;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .deadline {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .deadline i {
+            color: #764ba2;
+            margin-right: 0.5rem;
+        }
+
+        .progress-section {
+            margin: 1rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .progress-percentage {
+            font-weight: 600;
+            color: #764ba2;
+        }
+
+        .progress-track {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+        }
+
+        /* Opportunities Section */
+        .opportunity-card {
+            background: #f5f7f8;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: #764ba2;
+        }
+
+        .opportunity-card h3 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 0.8rem;
+        }
+
+        .opportunity-description {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            background: white;
+            color: #764ba2;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .duration {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .duration i {
+            color: #764ba2;
+        }
+
         /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .profile-section {
+                grid-template-columns: 280px 1fr;
+            }
+
+            .projects-sidebar {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                grid-column: 1 / -1;
+            }
+        }
+
         @media (max-width: 768px) {
             nav ul { 
                 justify-content: space-between; 
@@ -334,16 +577,17 @@
                 position: static;
             }
 
+            .projects-sidebar {
+                position: static;
+                grid-template-columns: 1fr;
+            }
+
             .profile-details h1 {
                 font-size: 1.5rem;
             }
 
-            .content-card {
-                padding: 1.5rem;
-            }
-
-            .content-card h2 {
-                font-size: 1.5rem;
+            .opportunities-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -359,12 +603,12 @@
     <nav>
         <ul>
             <li><a href="#home">
-                <span style="color:black;"">Intern</span><span style="color:red;">Ahead</span>
+                <span style="color:black;">Intern</span><span style="color:#764ba2;">Ahead</span>
             </a></li>
-            <li class="nav-item hideOnMobile"><a href="#home">Home</a></li>
+            <li class="nav-item hideOnMobile"><a href="index.html">Home</a></li>
             <li class="nav-item hideOnMobile"><a href="#pathways">Pathways</a></li>
-            <li class="nav-item hideOnMobile"><a href="#explor">Explore</a></li>
-            <li class="nav-item hideOnMobile"><a href="#profile">Profile</a></li>
+            <li class="nav-item hideOnMobile"><a href="#explore">Explore</a></li>
+            <li class="nav-item hideOnMobile"><a href="profile.html">Profile</a></li>
             <li class="nav-item hideOnMobile"><a href="#contact">Logout</a></li>
             <li class="menu-button" onclick="showSidebar()">
                 <a href="#">
@@ -387,9 +631,9 @@
             </button>
         </div>
         <ul class="sidebar-nav">
-            <li><a href="#home">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="#pathways">Pathways</a></li>
-            <li><a href="#explor">Explore</a></li>
+            <li><a href="#explore">Explore</a></li>
             <li><a href="#profile">Profile</a></li>
             <li><a href="#contact">Logout</a></li>
         </ul>
@@ -398,9 +642,9 @@
     <!-- Main Content -->
     <main>
         <section class="profile-section" id="profile">
-            <!-- Left Sidebar -->
+            <!-- Left Sidebar - Profile Info -->
             <div class="profile-sidebar">
-                <img src="images/Random Profile Pic.jpg" alt="Joshua Longoria" class="profile-image">
+                <img src="images/Random Profile Pic.jpg" alt="John Doe" class="profile-image">
                 
                 <div class="profile-details">
                     <h1>John Doe</h1>
@@ -433,15 +677,21 @@
                     
                     <div class="info-item">
                         <i class="fab fa-github"></i>
-                        <span>github.com/john Doe</span>
+                        <span>github.com/johnDoe</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Main Content Area -->
+            <!-- Center Column - Main Content -->
             <div class="profile-main">
+                <!-- About Me -->
                 <div class="content-card">
-                    <h2>About Me</h2>
+                    <div class="card-header">
+                        <h2>About Me</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
                     <p>
                         I am a passionate computer science student with a strong interest in software development, 
                         artificial intelligence, and web technologies. Throughout my academic journey, I've developed 
@@ -453,8 +703,14 @@
                     </p>
                 </div>
 
+                <!-- Education -->
                 <div class="content-card">
-                    <h2>Education</h2>
+                    <div class="card-header">
+                        <h2>Education</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
                     <h3>Bachelor of Science in Computer Science</h3>
                     <p><strong>Texas Tech University</strong> | Expected Graduation: May 2027</p>
                     <p>GPA: 3.8/4.0</p>
@@ -468,8 +724,14 @@
                     </ul>
                 </div>
 
+                <!-- Skills -->
                 <div class="content-card">
-                    <h2>Skills</h2>
+                    <div class="card-header">
+                        <h2>Skills</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
                     <h3>Programming Languages</h3>
                     <p>Python, Java, JavaScript, C++, HTML/CSS, SQL</p>
                     
@@ -480,8 +742,14 @@
                     <p>Team Collaboration, Problem Solving, Communication, Project Management</p>
                 </div>
 
+                <!-- Experience -->
                 <div class="content-card">
-                    <h2>Experience</h2>
+                    <div class="card-header">
+                        <h2>Experience</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
                     <h3>Software Development Intern</h3>
                     <p><strong>Tech Company XYZ</strong> | Summer 2024</p>
                     <ul>
@@ -492,8 +760,14 @@
                     </ul>
                 </div>
 
+                <!-- Projects -->
                 <div class="content-card">
-                    <h2>Projects</h2>
+                    <div class="card-header">
+                        <h2>Projects</h2>
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
                     <h3>Task Management Application</h3>
                     <p>
                         Built a full-stack task management application using React, Node.js, and MongoDB. 
@@ -507,37 +781,146 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Right Sidebar - Active Projects & Available Opportunities -->
+            <div class="projects-sidebar">
+                <!-- Active Projects -->
+                <div>
+                    <h2 class="section-title">Active Projects</h2>
+                    
+                    <div class="project-card" style="margin-bottom: 1.5rem;">
+                        <div class="project-info">
+                            <h3>Mobile App Development</h3>
+                            <p class="company-name">TechCorp Solutions</p>
+                            <div class="deadline">
+                                <i class="far fa-clock"></i>
+                                15 days left
+                            </div>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span class="progress-percentage">65%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <button class="btn-primary">View Details</button>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-info">
+                            <h3>E-commerce Website Redesign</h3>
+                            <p class="company-name">Digital Dynamics Inc</p>
+                            <div class="deadline">
+                                <i class="far fa-clock"></i>
+                                28 days left
+                            </div>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span class="progress-percentage">40%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        <button class="btn-primary">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Available Opportunities -->
+                <div>
+                    <h2 class="section-title">Available Opportunities</h2>
+                    
+                    <div class="opportunities-container">
+                        <div class="opportunity-card">
+                            <div class="company-logo">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>AI Chatbot Development</h3>
+                            <p class="opportunity-description">
+                                Develop an intelligent chatbot using NLP and machine learning.
+                            </p>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">NLP</span>
+                                <span class="skill-tag">TensorFlow</span>
+                            </div>
+                            <div class="duration">
+                                <i class="far fa-calendar"></i>
+                                <span>12 weeks</span>
+                            </div>
+                            <button class="btn-primary">Apply Now</button>
+                        </div>
+
+                        <div class="opportunity-card">
+                            <div class="company-logo">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Full-Stack Web Application</h3>
+                            <p class="opportunity-description">
+                                Build a comprehensive web app with modern technologies.
+                            </p>
+                            <div class="skills-tags">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">MongoDB</span>
+                            </div>
+                            <div class="duration">
+                                <i class="far fa-calendar"></i>
+                                <span>16 weeks</span>
+                            </div>
+                            <button class="btn-primary">Apply Now</button>
+                        </div>
+
+                        <div class="opportunity-card">
+                            <div class="company-logo">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>iOS App for Health Tracking</h3>
+                            <p class="opportunity-description">
+                                Create a native iOS app with beautiful UI and seamless UX.
+                            </p>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Swift</span>
+                                <span class="skill-tag">UIKit</span>
+                                <span class="skill-tag">CoreData</span>
+                            </div>
+                            <div class="duration">
+                                <i class="far fa-calendar"></i>
+                                <span>8 weeks</span>
+                            </div>
+                            <button class="btn-primary">Apply Now</button>
+                        </div>
+
+                        <div class="opportunity-card">
+                            <div class="company-logo">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Data Analytics Dashboard</h3>
+                            <p class="opportunity-description">
+                                Design an interactive dashboard for business metrics.
+                            </p>
+                            <div class="skills-tags">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">D3.js</span>
+                                <span class="skill-tag">SQL</span>
+                            </div>
+                            <div class="duration">
+                                <i class="far fa-calendar"></i>
+                                <span>12 weeks</span>
+                            </div>
+                            <button class="btn-primary">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
     <script>
         function showSidebar() {
-            document.getElementById('sidebar').classList.add('active');
-            document.getElementById('sidebarOverlay').classList.add('active');
-        }
-
-        function hideSidebar() {
-            document.getElementById('sidebar').classList.remove('active');
-            document.getElementById('sidebarOverlay').classList.remove('active');
-        }
-
-        // Progress bar on scroll
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.querySelector('.progress-bar').style.width = scrolled + '%';
-        });
-
-        // Add scrolled class to nav
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-    </script>
-</body>
-</html>
+            document.getElementById('sidebar
