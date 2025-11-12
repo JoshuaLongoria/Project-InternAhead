@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Login - InternAhead</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem 2rem;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo span:first-child {
+            color: black;
+            font-weight: bold;
+        }
+
+        .logo span:last-child {
+            color: red;
+            font-weight: bold;
+        }
+
+        .login-header h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .remember-forgot a {
+            color: #764ba2;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .remember-forgot a:hover {
+            color: #667eea;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .back-btn {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            color: #764ba2;
+            border: 2px solid #764ba2;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: #764ba2;
+            color: white;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            border-left: 4px solid #c62828;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            border-left: 4px solid #2e7d32;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .demo-credentials {
+            background: #f5f7f8;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .demo-credentials h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-credentials p {
+            margin-bottom: 0.3rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .demo-credentials code {
+            background: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">
+                <span>Intern</span><span>Ahead</span>
+            </div>
+            <h1>Company Login</h1>
+            <p>Access your company dashboard</p>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username">Company Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    placeholder="Company username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Password"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox" id="rememberMe">
+                    Remember me
+                </label>
+                <a href="#forgot-password">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+        </form>
+
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="demo-credentials">
+            <h4><i class="fas fa-info-circle"></i> Demo Credentials</h4>
+            <p><strong>Username:</strong> <code>TechCorp</code></p>
+            <p><strong>Password:</strong> <code>123456789</code></p>
+        </div>
+    </div>
+
+    <script>
+        // DEMO Credentials for company login
+        const VALID_CREDENTIALS = {
+            username: 'TechCorp',
+            password: '123456789'
+        };
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+
+            // Clear previous messages
+            errorMessage.classList.remove('show');
+            successMessage.classList.remove('show');
+
+            // Add loading state
+            loginBtn.classList.add('loading');
+            loginBtn.disabled = true;
+
+            // Simulate network delay
+            setTimeout(() => {
+                // Validate credentials
+                if (username === VALID_CREDENTIALS.username && password === VALID_CREDENTIALS.password) {
+                    // Success
+                    successMessage.textContent = '✓ Login successful! Redirecting to dashboard...';
+                    successMessage.classList.add('show');
+
+                    // Store login info in localStorage if "Remember me" is checked
+                    if (document.getElementById('rememberMe').checked) {
+                        localStorage.setItem('companyUsername', username);
+                    }
+
+                    // Redirect to company dashboard after 1.5 seconds
+                    setTimeout(() => {
+                        window.location.href = 'company-dashboard.html';
+                    }, 1500);
+                } else {
+                    // Error
+                    errorMessage.textContent = '✗ Invalid username or password. Please try again.';
+                    errorMessage.classList.add('show');
+
+                    // Reset button state
+                    loginBtn.classList.remove('loading');
+                    loginBtn.disabled = false;
+
+                    // Clear password field
+                    document.getElementById('password').value = '';
+                }
+            }, 500);
+        }
+
+        // Load remembered username if it exists
+        window.addEventListener('load', () => {
+            const rememberedUsername = localStorage.getItem('companyUsername');
+            if (rememberedUsername) {
+                document.getElementById('username').value = rememberedUsername;
+                document.getElementById('rememberMe').checked = true;
+            }
+        });
+
+        // Optional: Clear error message when user starts typing
+        document.getElementById('username').addEventListener('input', () => {
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+
+        document.getElementById('password').addEventListener('input', () => {
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+    </script>
+</body>
+</html>
