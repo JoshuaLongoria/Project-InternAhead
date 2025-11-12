@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard - InternAhead</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        nav li:first-child {
+            margin-right: auto;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #764ba2;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+        }
+
+        .menu-button {
+            display: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-button a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            height: 100vh;
+            width: 280px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            line-height: 1;
+            padding: 5px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #333;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .sidebar-nav li {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 18px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+            padding-left: 30px;
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            padding: 6rem 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Company Header */
+        .company-header {
+            background: #f5f7f8;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .company-logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #764ba2;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .company-info h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-info p {
+            color: #666;
+        }
+
+        .quick-stats {
+            display: flex;
+            gap: 2rem;
+            margin-left: auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Three Column Layout */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr 350px;
+            gap: 2rem;
+        }
+
+        /* Left Column - Post New Project Form */
+        .form-section {
+            background: #f5f7f8;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+        }
+
+        /* Center Column - Posted Projects */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .content-section {
+            background: #f5f7f8;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .project-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-closed {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-meta i {
+            color: #764ba2;
+        }
+
+        .btn-view {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+        }
+
+        /* Right Column - Recent Applications */
+        .applications-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .applications-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .applications-sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .applications-sidebar::-webkit-scrollbar-thumb {
+            background: #764ba2;
+            border-radius: 10px;
+        }
+
+        .applications-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #667eea;
+        }
+
+        .application-card {
+            background: #f5f7f8;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .application-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #764ba2;
+        }
+
+        .student-details h4 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 0.2rem;
+        }
+
+        .student-details p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .application-meta {
+            margin-bottom: 1rem;
+        }
+
+        .application-meta p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            background: white;
+            color: #764ba2;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .application-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .btn-accept {
+            background: #4caf50;
+            color: white;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-accept:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .btn-reject {
+            background: #f44336;
+            color: white;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reject:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+        }
+
+        .btn-profile {
+            grid-column: 1 / -1;
+            background: white;
+            color: #764ba2;
+            border: 2px solid #764ba2;
+            padding: 0.6rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-profile:hover {
+            background: #764ba2;
+            color: white;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .form-section,
+            .applications-sidebar {
+                position: static;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul { 
+                justify-content: space-between; 
+            }
+            
+            .menu-button { 
+                display: flex; 
+            }
+            
+            .hideOnMobile { 
+                display: none !important; 
+            }
+
+            .dashboard-container {
+                padding: 5rem 1rem 1rem;
+            }
+
+            .company-header {
+                flex-wrap: wrap;
+            }
+
+            .quick-stats {
+                margin-left: 0;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .stat-item {
+                width: 100%;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="hideSidebar()"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="index.html">
+                <span style="color:black;"">Intern</span><span style="color:red;">Ahead</span>
+            </a></li>
+            <li class="nav-item hideOnMobile"><a href="index.html">Home</a></li>
+            <li class="nav-item hideOnMobile"><a href="#pathways">Pathways</a></li>
+            <li class="nav-item hideOnMobile"><a href="#explor">Explore</a></li>
+            <li class="nav-item hideOnMobile"><a href="Company-Profile.html">Dashboard</a></li>
+            <li class="nav-item hideOnMobile"><a href="#contact">Logout</a></li>
+            <li class="menu-button" onclick="showSidebar()">
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>Navigation</span>
+            <button class="close-btn" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#pathways">Pathways</a></li>
+            <li><a href="#explor">Explore</a></li>
+            <li><a href="#profile">Profile</a></li>
+            <li><a href="#contact">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Company Header -->
+        <div class="company-header">
+            <div class="company-logo">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="company-info">
+                <h1>TechCorp Solutions</h1>
+                <p>Leading Technology & Innovation Company</p>
+            </div>
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Projects Posted</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">Applications Received</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Three Column Layout -->
+        <div class="dashboard-layout">
+            <!-- Left Column - Post New Project Form -->
+            <aside class="form-section">
+                <h2 class="section-title">Post New Project</h2>
+                <form id="projectForm">
+                    <div class="form-group">
+                        <label for="projectTitle">Project Title</label>
+                        <input type="text" id="projectTitle" placeholder="Enter project title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Describe the project details..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skills Required</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="python" value="Python">
+                                <label for="python">Python</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="javascript" value="JavaScript">
+                                <label for="javascript">JavaScript</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="react" value="React">
+                                <label for="react">React</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="nodejs" value="Node.js">
+                                <label for="nodejs">Node.js</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="java" value="Java">
+                                <label for="java">Java</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sql" value="SQL">
+                                <label for="sql">SQL</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <select id="duration" required>
+                            <option value="">Select duration</option>
+                            <option value="8">8 weeks</option>
+                            <option value="12">12 weeks</option>
+                            <option value="16">16 weeks</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="compensation">Compensation ($)</label>
+                        <input type="number" id="compensation" placeholder="Enter compensation amount" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-plus-circle"></i> Post Project
+                    </button>
+                </form>
+            </aside>
+
+            <!-- Center Column - Posted Projects -->
+            <div class="main-content">
+                <div class="content-section">
+                    <h2 class="section-title">Posted Projects</h2>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3>Mobile App Development</h3>
+                                <div class="project-meta">
+                                    <span><i class="fas fa-user-check"></i> 15 Applications</span>
+                                    <span><i class="far fa-calendar"></i> Posted: Oct 15, 2024</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-active">Active</span>
+                        </div>
+                        <button class="btn-view">View Applications</button>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3>E-commerce Website Redesign</h3>
+                                <div class="project-meta">
+                                    <span><i class="fas fa-user-check"></i> 12 Applications</span>
+                                    <span><i class="far fa-calendar"></i> Posted: Oct 20, 2024</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-active">Active</span>
+                        </div>
+                        <button class="btn-view">View Applications</button>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3>Data Analytics Dashboard</h3>
+                                <div class="project-meta">
+                                    <span><i class="fas fa-user-check"></i> 8 Applications</span>
+                                    <span><i class="far fa-calendar"></i> Posted: Sep 28, 2024</span>
+                                </div>
+                            </div>
+                            <span class="status-badge status-closed">Closed</span>
+                        </div>
+                        <button class="btn-view">View Applications</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Recent Applications -->
+            <aside class="applications-sidebar">
+                <h2 class="section-title">Recent Applications</h2>
+
+                <div class="application-card">
+                    <div class="student-info">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="student-details">
+                            <h4>Sarah Johnson</h4>
+                            <p>Computer Science</p>
+                        </div>
+                    </div>
+                    <div class="application-meta">
+                        <p><strong>Applied to:</strong> Mobile App Development</p>
+                        <p><i class="far fa-calendar"></i> Nov 8, 2024</p>
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">UI/UX</span>
+                    </div>
+                    <div class="application-actions">
+                        <button class="btn-profile">View Profile</button>
+                        <button class="btn-accept">Accept</button>
+                        <button class="btn-reject">Reject</button>
+                    </div>
+                </div>
+
+                <div class="application-card">
+                    <div class="student-info">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="student-details">
+                            <h4>Michael Chen</h4>
+                            <p>Software Engineering</p>
+                        </div>
+                    </div>
+                    <div class="application-meta">
+                        <p><strong>Applied to:</strong> E-commerce Website Redesign</p>
+                        <p><i class="far fa-calendar"></i> Nov 9, 2024</p>
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                    <div class="application-actions">
+                        <button class="btn-profile">View Profile</button>
+                        <button class="btn-accept">Accept</button>
+                        <button class="btn-reject">Reject</button>
+                    </div>
+                </div>
+
+                <div class="application-card">
+                    <div class="student-info">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="student-details">
+                            <h4>Emily Rodriguez</h4>
+                            <p>Data Science</p>
+                        </div>
+                    </div>
+                    <div class="application-meta">
+                        <p><strong>Applied to:</strong> Mobile App Development</p>
+                        <p><i class="far fa-calendar"></i> Nov 10, 2024</p>
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Firebase</span>
+                    </div>
+                    <div class="application-actions">
+                        <button class="btn-profile">View Profile</button>
+                        <button class="btn-accept">Accept</button>
+                        <button class="btn-reject">Reject</button>
+                    </div>
+                </div>
+
+                <div class="application-card">
+                    <div class="student-info">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="student-details">
+                            <h4>Davi
