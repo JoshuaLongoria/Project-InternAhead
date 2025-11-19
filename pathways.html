@@ -1,1 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacob Henry - Pathways</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
 
+<body>
+    <div class="progress-bar"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="hideSidebar()"></div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html"><span style="color:black;">Intern</span><span style="color:red;">Ahead</span></a></li>
+            <li class="nav-item hideOnMobile"><a href="index.html">Home</a></li>
+            <li class="nav-item hideOnMobile"><a href="pathways.html">Pathways</a></li>
+            <li class="nav-item hideOnMobile"><a href="#explor">Explore</a></li>
+            <li class="nav-item hideOnMobile"><a href="profile.html">Profile</a></li>
+            <li class="nav-item hideOnMobile"><a href="#signin">Logout</a></li>
+            <li class="menu-button" onclick="showSidebar()">
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>Navigation</span>
+            <button class="close-btn" onclick="hideSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="index.html" onclick="hideSidebar()">Home</a></li>
+            <li><a href="#about-us" onclick="hideSidebar()">About Us</a></li>
+            <li><a href="#contact" onclick="hideSidebar()">Contact</a></li>
+            <li><a href="#signin" onclick="hideSidebar()">Sign In</a></li>
+            <li><a href="profile.html" onclick="hideSidebar()">Profile</a></li>
+            <li><a href="#logout" onclick="hideSidebar()">Logout</a></li>
+        </ul>
+    </div>
+
+    <main class="home-section">
+
+      
+        <div style="text-align:center; margin-bottom:25px;">
+           <select id="roadmapSelector" onchange="switchRoadmap()">
+                <option value="cyber">Cybersecurity Roadmap</option>
+                <option value="ml">Machine Learning Roadmap</option>
+                <option value="se">Software Engineering Roadmap</option>
+            </select>
+        </div>
+     
+       
+        <div class="content-card roadmap" id="cyber-roadmap">
+            <h1 style="text-align:center;margin-bottom:20px;">Cybersecurity Roadmap</h1>
+            <div class="timeline">
+
+                <div class="card">
+                    <span class="badge completed">Completed</span>
+                    <span class="months">Months 1–3</span>
+                    <h2>Security Fundamentals</h2>
+                    <div class="desc">Build foundation in networking, systems, and security basics</div>
+                    <ul>
+                        <li>Networking basics (TCP/IP, DNS, HTTP/HTTPS)</li>
+                        <li>Security principles (CIA triad, authentication)</li>
+                        <li>Linux system administration</li>
+                        <li>Basic scripting (Python, Bash)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="badge inprogress">In Progress</span>
+                    <span class="months">Months 4–6</span>
+                    <h2>Core Security Skills</h2>
+                    <ul>
+                        <li>OWASP Top 10</li>
+                        <li>Cryptography basics</li>
+                        <li>Firewalls & network defense</li>
+                        <li>Nmap, Burp Suite</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+
+                    <span class="badge inprogress">In Progress</span>
+                    <span class="months">Months 7–9</span>
+                    <h2>Hands-on Practice & Certs</h2>
+                    <ul>
+                        <li>CTFs (HTB, THM)</li>
+                        <li>Home lab</li>
+                        <li>Security+ or CEH prep</li>
+                        <li>Pentesting practice</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+
+                    <span class="badge planned">Planned</span>
+                    <span class="months">Months 10–12</span>
+                    <h2>Specialization & Career Prep</h2>
+                    <ul>
+                        <li>Pentesting / SOC / Cloud</li>
+                        <li>Create portfolio</li>
+                        <li>Apply to internships</li>
+                        <li>Network professionally</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+      
+        <div class="content-card roadmap" id="ml-roadmap" style="display:none;">
+            <h1 style="text-align:center; margin-bottom:20px;">Machine Learning Roadmap</h1>
+            <div class="timeline">
+
+                <div class="card">
+                    
+                    <span class="badge completed">Completed</span>
+                    <span class="months">Months 1–3</span>
+                    <h2>ML Foundations</h2>
+                    <ul>
+                        <li>Python for ML (NumPy, Pandas)</li>
+                        <li>Networking & security basics</li>
+                        <li>Threat modeling for ML systems</li>
+                        <li>Intro to ML (regression, classification)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    
+                    <span class="badge inprogress">In Progress</span>
+                    <span class="months">Months 4–6</span>
+                    <h2>Core ML Security Concepts</h2>
+                    <ul>
+                        <li>Supervised learning (regression, classification)</li>
+                        <li>Unsupervised learning (clustering, PCA)</li>
+                        <li>Scikit-learn and model evaluation</li>
+                        <li>Feature engineering and data preprocessing</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    
+                    <span class="badge planned">Planned</span>
+                    <span class="months">Months 7–9</span>
+                    <h2>Deep Learning and Projects</h2>
+                    <ul>
+                        <li>Neural networks with TensorFlow/PyTorch</li>
+                        <li>RNNs/Transformers for NLP</li>
+                        <li>CNNs for computer vision</li>
+                        <li>Complete 2-3 end-to-end ML projects</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    
+                    <span class="badge planned">Planned</span>
+                    <span class="months">Months 10–12</span>
+                    <h2>Specialization & Portfolio</h2>
+                    <ul>
+                        <li>Specialize (CV, NLP, or MLOps)</li>
+                        <li>Kaggle competitions and GitHub portfoliot</li>
+                        <li>Deploy models (Flask, FastAPI, cloud platforms)</li>
+                        <li>Apply to ML internships</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        
+        <div class="content-card roadmap" id="se-roadmap" style="display:none;">
+            <h1 style="text-align:center; margin-bottom:20px;">Software Engineering Roadmap</h1>
+            <div class="timeline">
+
+                <div class="card">
+                    <span class="badge completed">Completed</span>
+                    <span class="months">Months 1–3</span>
+                    <h2>Programming Fundamentals</h2>
+                    <ul>
+                        <li>Learn Python or JavaScript basics</li>
+                        <li>Understand data structures (arrays, linked lists,) </li>
+                        <li>Complete 50+ LeetCode Easy problems</li>
+                        <li>Practice algorithms (sorting, searching)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="badge inprogress">In Progress</span>
+                    <span class="months">Months 4–6</span>
+                    <h2>Web Development Skills</h2>
+                    <ul>
+                        <li>Learn React and modern frontend</li>
+                        <li>Database basics (SQL & NoSQL)</li>
+                        <li>Backend development (Node.js/Express)</li>
+                        <li>Build 2-3 portfolio projects</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="badge planned">Planned</span>
+                    <span class="months">Months 7–9</span>
+                    <h2>Interview Preperation</h2>
+                    <ul>
+                        <li>Solve 100+ medium LeetCode problems</li>
+                        <li>System design fundamentals</li>
+                        <li>Practice behavioral questions</li>
+                        <li>Mock interviews with peers</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="badge planned">Planned</span>
+                    <span class="months">Months 10–12</span>
+                    <h2>Application & Networking</h2>
+                    <ul>
+                        <li>Polish resume and LinkedIn profile</li>
+                        <li>Attend career fairs and networking events</li>
+                        <li>Apply to 50+ internship positions</li>
+                        <li>Contribute to open source projects</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>InternAhead</h3>
+                <p>Your future internship starts here. Connecting students with leading companies to build skills and land dream opportunities.</p>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#pathways">Pathways</a></li>
+                    <li><a href="#explore">Explore</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> internaheadcontact@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Tech Drive, Innovation City</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; <span id="current-year"></span> InternAhead. All rights reserved.
+        </div>
+    </footer>
+
+
+   
+    <script>
+        function switchRoadmap() {
+            const roadmaps = {
+                cyber: document.getElementById("cyber-roadmap"),
+                ml: document.getElementById("ml-roadmap"),
+                se: document.getElementById("se-roadmap")
+            };
+
+            const selected = document.getElementById("roadmapSelector").value;
+
+            Object.keys(roadmaps).forEach(key => {
+                roadmaps[key].style.display = key === selected ? "block" : "none";
+            });
+        }
+    </script>
+
+    <style>
+        .timeline { position: relative; margin: 20px 0; }
+        .timeline .card { 
+            margin-bottom: 40px; 
+            border-radius: 12px; 
+            padding: 20px; 
+            background: #fff; 
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05); 
+            position: relative; 
+        }
+        .timeline .dot { width: 14px; height: 14px; background: #4b8af0; border-radius: 50%; position: absolute; left: -9px; top: 25px; }
+        .badge { float:right; padding:5px 12px; border-radius:8px; font-size:12px; color:white; }
+        .completed { background:#805ad5; }
+        .inprogress { background:#3182ce; }
+        .planned { background:#a0aec0; }
+        .months { float:right; color:#666; font-size:12px; margin-top:5px; }
+        @media (max-width:768px) {
+            .badge, .months { float:none; display:block; margin-top:10px; }
+        }
+    </style>
+</body>
+</html>
