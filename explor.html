@@ -1,1 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternAhead - Explore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        body{
+            background-color:#ffffff;
+            color:#333;
+            line-height:1.6;
+        }
+
+        /* simple progress bar like other pages */
+        .progress-bar{
+            position:fixed;
+            top:0;
+            left:0;
+            width:0%;
+            height:3px;
+            background:linear-gradient(45deg,#667eea,#764ba2);
+            z-index:1001;
+            transition:width 0.1s ease;
+        }
+
+        /* nav similar to profile/company */
+        nav{
+            position:fixed;
+            top:0;
+            width:100%;
+            background:rgba(255,255,255,0.95);
+            backdrop-filter:blur(10px);
+            z-index:1000;
+            box-shadow:0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav ul{
+            list-style:none;
+            display:flex;
+            align-items:center;
+            padding:0.75rem 2rem;
+        }
+
+        nav li{
+            margin:0 0.5rem;
+        }
+
+        nav li:first-child{
+            margin-right:auto;
+            font-weight:bold;
+            font-size:1.2rem;
+        }
+
+        nav a{
+            text-decoration:none;
+            color:#333;
+            margin:0 0.25rem;
+            padding:0.5rem 1rem;
+            border-radius:25px;
+            transition:all 0.2s ease;
+            position:relative;
+            font-size:0.95rem;
+        }
+
+        nav a:hover{
+            background:rgba(118,75,162,0.08);
+            color:#764ba2;
+        }
+
+        nav a.active{
+            color:#764ba2;
+            font-weight:600;
+        }
+
+        .menu-button{
+            display:none;
+        }
+
+        /* main layout */
+        .home-section{
+            max-width:1100px;
+            margin:0 auto;
+            padding:6rem 1.5rem 3rem;
+            display:flex;
+            flex-direction:column;
+            gap:2rem;
+        }
+
+        .content-card{
+            background:#f5f7f8;
+            padding:2rem;
+            border-radius:15px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        /* hero */
+        .explore-hero{
+            text-align:center;
+        }
+
+        .explore-hero h1{
+            font-size:1.9rem;
+            color:#764ba2;
+            margin-bottom:0.75rem;
+        }
+
+        .explore-hero p{
+            max-width:650px;
+            margin:0 auto 1.5rem;
+            color:#555;
+            font-size:0.95rem;
+        }
+
+        .search-wrap{
+            max-width:420px;
+            margin:0 auto;
+        }
+
+        .search-wrap input{
+            width:100%;
+            padding:0.8rem 1rem;
+            border-radius:999px;
+            border:1px solid #ddd;
+            font-size:0.95rem;
+            outline:none;
+        }
+
+        .search-wrap input:focus{
+            border-color:#764ba2;
+            box-shadow:0 0 0 2px rgba(118,75,162,0.15);
+        }
+
+        /* cards */
+        .pathway-grid{
+            display:grid;
+            grid-template-columns:repeat(3,minmax(0,1fr));
+            gap:1.5rem;
+        }
+
+        .pathway-card h2{
+            font-size:1.25rem;
+            color:#764ba2;
+            margin-bottom:0.4rem;
+        }
+
+        .pathway-card p{
+            font-size:0.95rem;
+            color:#555;
+            margin-bottom:0.35rem;
+        }
+
+        .pathway-card h3{
+            margin-top:0.75rem;
+            margin-bottom:0.25rem;
+            font-size:1rem;
+            color:#333;
+        }
+
+        .pathway-card ul{
+            margin-left:1.2rem;
+            margin-bottom:0.6rem;
+            font-size:0.94rem;
+        }
+
+        .pathway-card ul li{
+            margin-bottom:0.25rem;
+        }
+
+        .duration{
+            font-size:0.9rem;
+            color:#666;
+            margin-bottom:0.9rem;
+        }
+
+        .btn-roadmap{
+            display:inline-block;
+            padding:0.55rem 1.3rem;
+            border-radius:20px;
+            background:#764ba2;
+            color:#fff;
+            text-decoration:none;
+            font-size:0.9rem;
+            border:none;
+            cursor:pointer;
+            transition:background 0.2s ease,transform 0.1s ease;
+        }
+
+        .btn-roadmap:hover{
+            background:#633b98;
+            transform:translateY(-1px);
+        }
+
+        @media (max-width:900px){
+            .pathway-grid{
+                grid-template-columns:repeat(2,minmax(0,1fr));
+            }
+        }
+
+        @media (max-width:700px){
+            .home-section{
+                padding-top:5.5rem;
+            }
+            .pathway-grid{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar"></div>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span style="color:black;">Intern</span><span style="color:red;">Ahead</span>
+                </a>
+            </li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pathways.html">Pathways</a></li>
+            <li><a href="explore.html" class="active">Explore</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="Login-page.html">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main class="home-section">
+
+        <!-- hero -->
+        <section class="content-card explore-hero">
+            <h1>Find Your Next Pathway</h1>
+            <p>
+                Discover curated learning paths designed to help you gain skills, build projects,
+                and land your dream tech internship.
+            </p>
+            <div class="search-wrap">
+                <!-- label hidden but still there for accessibility -->
+                <label for="pathwaySearch" style="display:none;">Search pathways</label>
+                <input type="search" id="pathwaySearch" placeholder="Search pathways...">
+            </div>
+        </section>
+
+        <!-- cards -->
+        <section class="pathway-grid">
+
+            <!-- Software Engineering -->
+            <article class="content-card pathway-card">
+                <h2>Software Engineering</h2>
+                <p><strong>Goal:</strong> Land your first Software Engineering internship</p>
+                <p><strong>Overview:</strong> Learn to code, build projects, and prepare for software interviews.</p>
+
+                <h3>What You'll Learn:</h3>
+                <ul>
+                    <li>Full-stack web development (React, SQL)</li>
+                    <li>Data structures, algorithms, and system design</li>
+                    <li>Interview prep and resume-building strategies</li>
+                </ul>
+
+                <p class="duration"><strong>Duration:</strong> ~12 months</p>
+                <a href="pathways.html" class="btn-roadmap">View Software Roadmap</a>
+            </article>
+
+            <!-- Cybersecurity -->
+            <article class="content-card pathway-card">
+                <h2>Cybersecurity</h2>
+                <p><strong>Goal:</strong> Land your first Cybersecurity internship</p>
+                <p><strong>Overview:</strong> Develop hands-on security skills to protect networks and systems.</p>
+
+                <h3>What You'll Learn:</h3>
+                <ul>
+                    <li>Networking and security fundamentals</li>
+                    <li>Web app vulnerabilities and penetration testing</li>
+                    <li>Tools like Wireshark, Burp Suite, and Nmap</li>
+                </ul>
+
+                <p class="duration"><strong>Duration:</strong> ~6–12 months</p>
+                <a href="pathways.html" class="btn-roadmap">View Security Roadmap</a>
+            </article>
+
+            <!-- Machine Learning -->
+            <article class="content-card pathway-card">
+                <h2>Machine Learning</h2>
+                <p><strong>Goal:</strong> Land your first Machine Learning internship</p>
+                <p><strong>Overview:</strong> Explore ML fundamentals and build real-world projects.</p>
+
+                <h3>What You'll Learn:</h3>
+                <ul>
+                    <li>Python for data analysis and model training</li>
+                    <li>Core ML and deep learning algorithms</li>
+                    <li>End-to-end projects and model deployment</li>
+                </ul>
+
+                <p class="duration"><strong>Duration:</strong> ~12 months</p>
+                <a href="pathways.html" class="btn-roadmap">View Machine Roadmap</a>
+            </article>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
