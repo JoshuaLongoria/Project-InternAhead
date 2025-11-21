@@ -26,7 +26,7 @@
 - Implemented landing page HTML structure
 - Created responsive navigation bar
 -  Designed and implemented color scheme
-- [List other specific contributions]
+- Implemented CompanyUser landing page
 ### [Jacob Henry]
 - Designed and implemented color scheme
 - Created footer component
