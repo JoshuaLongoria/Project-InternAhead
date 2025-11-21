@@ -1,5 +1,5 @@
 
-# Connect Platform - Project 2
+# InternAhead Platform - Project 2
 ## Team Name/Number: [charlie1]
 ## Team Members
 - [Joshua Longoria] - [JoshuaLongoria]
