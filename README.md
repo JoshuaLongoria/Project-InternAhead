@@ -30,8 +30,8 @@
 ### [Jacob Henry]
 - Designed and implemented color scheme
 - Created footer component
-- [List other specific contributions]
-### [Harrison Greene]]
+- Implemented the pathways page.
+### [Harrison Greene]
 -  Implemented landing page HTML structure
 - Made site responsive for mobile devices
 ### [Dara Alli]
